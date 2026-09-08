@@ -91,35 +91,21 @@
         <p><%= item.solution %></p>
       </section>
 
+      <% if (item.processFlow && item.processFlow.length) { %>
       <section class="detail-section flow-section">
         <h2>Flujo del proceso</h2>
         <div class="flow">
-          <div class="flow-step">
-            <div class="flow-icon">①</div>
-            <div class="flow-label">Relevamiento</div>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step">
-            <div class="flow-icon">②</div>
-            <div class="flow-label">Diseño funcional</div>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step">
-            <div class="flow-icon">③</div>
-            <div class="flow-label">Implementación</div>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step">
-            <div class="flow-icon">④</div>
-            <div class="flow-label">Capacitación</div>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step">
-            <div class="flow-icon">⑤</div>
-            <div class="flow-label">Monitoreo</div>
-          </div>
+          <% const circled = ['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩']; %>
+          <% item.processFlow.forEach((step, i) => { %>
+            <% if (i > 0) { %><div class="flow-arrow">→</div><% } %>
+            <div class="flow-step">
+              <div class="flow-icon"><%= circled[i] || (i+1) %></div>
+              <div class="flow-label"><%= step %></div>
+            </div>
+          <% }) %>
         </div>
       </section>
+      <% } %>
 
       <div class="detail-nav">
         <a href="/" class="btn-back">← Volver al listado</a>
