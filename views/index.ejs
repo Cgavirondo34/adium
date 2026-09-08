@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regulatory Cases — Asuntos Regulatorios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-mark">RC</span>
+        <div>
+          <span class="brand-name">Regulatory Cases</span>
+          <span class="brand-sub">Automatización & BI · Asuntos Regulatorios</span>
+        </div>
+      </div>
+      <div class="header-meta">
+        <span class="total-badge"><%= total %> casos en base</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <!-- Sidebar filtros -->
+    <aside class="sidebar">
+      <form id="filterForm" method="GET" action="/">
+
+        <div class="filter-group">
+          <label>Buscar</label>
+          <input type="text" name="q" placeholder="título, tag, keyword…"
+            value="<%= active.q || '' %>" class="search-input">
+        </div>
+
+        <div class="filter-group">
+          <label>Categoría</label>
+          <select name="category">
+            <option value="">Todas</option>
+            <% filters.categories.forEach(cat => { %>
+              <option value="<%= cat %>" <%= active.category === cat ? 'selected' : '' %>><%= cat %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Complejidad</label>
+          <select name="complexity">
+            <option value="">Todas</option>
+            <% filters.complexities.forEach(c => { %>
+              <option value="<%= c %>" <%= active.complexity === c ? 'selected' : '' %>><%= c %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Impacto</label>
+          <select name="impact">
+            <option value="">Todos</option>
+            <% filters.impacts.forEach(i => { %>
+              <option value="<%= i %>" <%= active.impact === i ? 'selected' : '' %>><%= i %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Tecnología</label>
+          <select name="tech">
+            <option value="">Todas</option>
+            <% filters.technologies.forEach(t => { %>
+              <option value="<%= t %>" <%= active.tech === t ? 'selected' : '' %>><%= t %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="filter-group filter-check">
+          <label class="checkbox-label">
+            <input type="checkbox" name="quickWin" value="true"
+              <%= active.quickWin === 'true' ? 'checked' : '' %>>
+            Solo Quick Wins
+          </label>
+        </div>
+
+        <div class="filter-actions">
+          <button type="submit" class="btn-apply">Aplicar filtros</button>
+          <a href="/" class="btn-clear">Limpiar</a>
+        </div>
+
+      </form>
+
+      <div class="stats-panel">
+        <div class="stat-item">
+          <span class="stat-num" id="stat-total"><%= total %></span>
+          <span class="stat-label">Total casos</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num" id="stat-qw">—</span>
+          <span class="stat-label">Quick Wins</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num" id="stat-high">—</span>
+          <span class="stat-label">Impacto Alto</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Grilla de casos -->
+    <section class="cases-grid">
+      <div class="results-bar">
+        <span><%= cases.length %> resultado<%= cases.length !== 1 ? 's' : '' %></span>
+        <div class="sort-control">
+          <label>Ordenar por</label>
+          <select id="sortSelect">
+            <option value="id">ID</option>
+            <option value="impact">Impacto</option>
+            <option value="complexity">Complejidad</option>
+            <option value="quickWin">Quick Win primero</option>
+          </select>
+        </div>
+      </div>
+
+      <% if (cases.length === 0) { %>
+        <div class="empty-state">
+          <p>No hay casos que coincidan con los filtros aplicados.</p>
+          <a href="/">Ver todos los casos</a>
+        </div>
+      <% } %>
+
+      <div class="grid" id="casesGrid">
+        <% cases.forEach(c => { %>
+          <a href="/case/<%= c.id %>" class="card"
+             data-id="<%= c.id %>"
+             data-impact="<%= c.impact %>"
+             data-complexity="<%= c.complexity %>"
+             data-quickwin="<%= c.quickWin %>">
+
+            <div class="card-header">
+              <span class="case-id mono"><%= c.id %></span>
+              <% if (c.quickWin) { %>
+                <span class="badge qw">Quick Win</span>
+              <% } %>
+              <span class="badge impact-<%= c.impact.toLowerCase() %>"><%= c.impact %> impacto</span>
+            </div>
+
+            <h2 class="card-title"><%= c.title %></h2>
+            <p class="card-desc"><%= c.description.substring(0, 140) %>…</p>
+
+            <div class="card-meta">
+              <span class="meta-item complexity-<%= c.complexity.toLowerCase() %>">
+                <%= c.complexity %> complejidad
+              </span>
+              <span class="meta-item">⏱ <%= c.timeEstimate %></span>
+              <span class="meta-item scope"><%= c.filial %></span>
+            </div>
+
+            <div class="card-techs">
+              <% c.technologies.slice(0, 3).forEach(t => { %>
+                <span class="tech-chip"><%= t %></span>
+              <% }) %>
+              <% if (c.technologies.length > 3) { %>
+                <span class="tech-chip more">+<%= c.technologies.length - 3 %></span>
+              <% } %>
+            </div>
+          </a>
+        <% }) %>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "regulatory-cases",
+  "version": "1.0.0",
+  "description": "Repositorio interactivo de casos de automatización y BI para Asuntos Regulatorios",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ejs": "^3.1.9"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

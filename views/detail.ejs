@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= item.id %> · <%= item.title %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="detail-page">
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-mark">RC</span>
+        <div>
+          <span class="brand-name">Regulatory Cases</span>
+          <span class="brand-sub">Automatización & BI · Asuntos Regulatorios</span>
+        </div>
+      </div>
+      <a href="/" class="back-link">← Volver al listado</a>
+    </div>
+  </header>
+
+  <main class="detail-layout">
+
+    <div class="detail-sidebar">
+      <div class="detail-meta-card">
+        <div class="detail-id mono"><%= item.id %></div>
+        
+        <div class="meta-row">
+          <span class="meta-key">Categoría</span>
+          <span class="meta-val"><%= item.category %></span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Complejidad</span>
+          <span class="meta-val badge complexity-<%= item.complexity.toLowerCase() %>"><%= item.complexity %></span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Impacto</span>
+          <span class="meta-val badge impact-<%= item.impact.toLowerCase() %>"><%= item.impact %></span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Alcance</span>
+          <span class="meta-val"><%= item.filial %></span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Estimación</span>
+          <span class="meta-val"><%= item.timeEstimate %></span>
+        </div>
+        <% if (item.quickWin) { %>
+        <div class="meta-row">
+          <span class="meta-key">Tipo</span>
+          <span class="meta-val badge qw">Quick Win</span>
+        </div>
+        <% } %>
+        <div class="meta-row">
+          <span class="meta-key">Estado</span>
+          <span class="meta-val"><%= item.status %></span>
+        </div>
+      </div>
+
+      <div class="tech-block">
+        <div class="tech-block-title">Stack tecnológico</div>
+        <% item.technologies.forEach(t => { %>
+          <span class="tech-chip large"><%= t %></span>
+        <% }) %>
+      </div>
+
+      <div class="tags-block">
+        <div class="tech-block-title">Tags</div>
+        <% item.tags.forEach(t => { %>
+          <a href="/?q=<%= t %>" class="tag-link">#<%= t %></a>
+        <% }) %>
+      </div>
+    </div>
+
+    <article class="detail-content">
+      <h1 class="detail-title"><%= item.title %></h1>
+      <p class="detail-lead"><%= item.description %></p>
+
+      <section class="detail-section">
+        <h2>Problema identificado</h2>
+        <p><%= item.problem %></p>
+      </section>
+
+      <section class="detail-section">
+        <h2>Solución propuesta</h2>
+        <p><%= item.solution %></p>
+      </section>
+
+      <section class="detail-section flow-section">
+        <h2>Flujo del proceso</h2>
+        <div class="flow">
+          <div class="flow-step">
+            <div class="flow-icon">①</div>
+            <div class="flow-label">Relevamiento</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="flow-icon">②</div>
+            <div class="flow-label">Diseño funcional</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="flow-icon">③</div>
+            <div class="flow-label">Implementación</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="flow-icon">④</div>
+            <div class="flow-label">Capacitación</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="flow-icon">⑤</div>
+            <div class="flow-label">Monitoreo</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="detail-nav">
+        <a href="/" class="btn-back">← Volver al listado</a>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>
