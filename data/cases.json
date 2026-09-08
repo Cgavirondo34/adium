@@ -9,11 +9,12 @@
     "category": "Automatización de procesos",
     "complexity": "Alta",
     "impact": "Alto",
-    "status": "Ejemplo",
+    "status": "En desarrollo",
     "timeEstimate": "3-4 meses",
     "quickWin": false,
     "filial": "Regional",
-    "tags": ["aprobación", "dossiers", "firma digital", "trazabilidad"]
+    "tags": ["aprobación", "dossiers", "firma digital", "trazabilidad"],
+    "processFlow": ["Relevamiento", "Diseño funcional", "Implementación", "Capacitación", "Monitoreo"]
   },
   {
     "id": "RC-002",
@@ -29,7 +30,8 @@
     "timeEstimate": "4-6 semanas",
     "quickWin": true,
     "filial": "Multi-filial",
-    "tags": ["alertas", "no conformidades", "desvíos", "escalamiento"]
+    "tags": ["alertas", "no conformidades", "desvíos", "escalamiento"],
+    "processFlow": ["Definición de reglas", "Configuración de triggers", "Pruebas", "Despliegue", "Ajuste continuo"]
   },
   {
     "id": "RC-003",
@@ -45,7 +47,8 @@
     "timeEstimate": "3-5 semanas",
     "quickWin": true,
     "filial": "Corporativo",
-    "tags": ["dashboard", "KPIs", "reporting", "ejecutivo"]
+    "tags": ["dashboard", "KPIs", "reporting", "ejecutivo"],
+    "processFlow": ["Definición de KPIs", "Modelo de datos", "Diseño visual", "Validación", "Publicación"]
   },
   {
     "id": "RC-004",
@@ -61,7 +64,8 @@
     "timeEstimate": "4-8 semanas",
     "quickWin": false,
     "filial": "Multi-filial",
-    "tags": ["relevamiento", "procesos", "backlog", "priorización"]
+    "tags": ["relevamiento", "procesos", "backlog", "priorización"],
+    "processFlow": ["Entrevistas", "Mapeo AS-IS", "Análisis de brechas", "Priorización", "Roadmap"]
   },
   {
     "id": "RC-005",
@@ -77,7 +81,8 @@
     "timeEstimate": "2-3 meses",
     "quickWin": false,
     "filial": "Regional",
-    "tags": ["liberaciones", "productos", "QA", "seguimiento"]
+    "tags": ["liberaciones", "productos", "QA", "seguimiento"],
+    "processFlow": ["Carga de documentación", "Revisión QA", "Aprobación regulatoria", "Liberación comercial", "Auditoría"]
   },
   {
     "id": "RC-006",
@@ -93,6 +98,7 @@
     "timeEstimate": "2-3 semanas",
     "quickWin": true,
     "filial": "Multi-filial",
-    "tags": ["NPS", "satisfacción", "encuestas", "mejora continua"]
+    "tags": ["NPS", "satisfacción", "encuestas", "mejora continua"],
+    "processFlow": ["Diseño de encuesta", "Configuración de disparo", "Piloto", "Despliegue", "Análisis de resultados"]
   }
 ]
