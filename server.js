@@ -57,6 +57,11 @@ app.get('/case/:id', (req, res) => {
   res.render('detail', { item: c });
 });
 
+// GET /demo/dossiers — Demo module: dossier approval flow
+app.get('/demo/dossiers', (req, res) => {
+  res.render('demo-dossiers');
+});
+
 // GET /api/cases — JSON API
 app.get('/api/cases', (req, res) => {
   res.json({ total: cases.length, cases });
